@@ -1,6 +1,7 @@
 package com.example.banking_api.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
@@ -10,10 +11,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotBlank
     @Column(name = "first_name")
     private String firstName;
+    @NotBlank
     @Column(name = "last_name")
     private String lastName;
+    @NotBlank
     @Column(name = "email")
     private String email;
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)

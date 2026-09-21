@@ -6,6 +6,7 @@ import com.example.banking_api.mapper.TransactionMapper;
 import com.example.banking_api.service.AccountService;
 import com.example.banking_api.service.TransactionService;
 import com.example.banking_api.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class TransactionController {
 
     @PostMapping("/transactions")
 
-    public TransactionDTO createTransaction(@RequestBody Transaction transaction){
+    public TransactionDTO createTransaction( @Valid @RequestBody Transaction transaction){
         Transaction transaction1=transactionService.save(transaction);
         return transactionMapper.toDTO(transaction1);
     }

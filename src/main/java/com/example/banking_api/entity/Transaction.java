@@ -2,6 +2,9 @@ package com.example.banking_api.entity;
 
 import com.example.banking_api.enums.TransactionType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -12,6 +15,8 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull
+    @Positive
     @Column(name = "amount")
     private BigDecimal amount;
     @Column(name ="date")

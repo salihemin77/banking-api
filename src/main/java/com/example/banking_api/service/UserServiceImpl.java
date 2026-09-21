@@ -1,6 +1,7 @@
 package com.example.banking_api.service;
 
 import com.example.banking_api.entity.User;
+import com.example.banking_api.exception.UserNotFoundException;
 import com.example.banking_api.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class UserServiceImpl  implements UserService {
 
     @Override
     public User findById(Integer id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow(()->new UserNotFoundException("USER NOT FOUND İD:"+id));
     }
 
     @Override

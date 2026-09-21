@@ -5,8 +5,10 @@ import com.example.banking_api.entity.Account;
 import com.example.banking_api.mapper.AccountMapper;
 import com.example.banking_api.mapper.UserMapper;
 import com.example.banking_api.service.AccountService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -34,7 +36,7 @@ public class AccountController {
         return accountMapper.toDTO(account);
     }
     @PostMapping("/accounts")
-    public AccountDTO createAccount(@RequestBody Account account){
+    public AccountDTO createAccount(@Valid @RequestBody Account account){
         Account account1=accountService.save(account);
         return accountMapper.toDTO(account1);
 
@@ -44,6 +46,38 @@ public class AccountController {
         accountService.deleteById(id);
 
     }
+    @PostMapping("/accounts/{id}/deposit")
+    public AccountDTO deposit(@PathVariable Integer id,  @RequestBody BigDecimal amount ){
+     Account account=accountService.deposit(id, amount);
+     return accountMapper.toDTO(account);
+    }
+    @PostMapping("/accounts/{id}/withdraw")
+    public AccountDTO withdraw(@PathVariable Integer id,  @RequestBody BigDecimal amount ){
+        Account account=accountService.withdraw(id, amount);
+        return accountMapper.toDTO(account);
+    }
+
+
+        // mevcut metodların burada
+
+        @PostMapping("/accounts/{fromAccountId}/transfer/{toAccountId}")
+        public AccountDTO transfer(
+                @PathVariable Integer fromAccountId,
+                @PathVariable Integer toAccountId,
+                @RequestBody BigDecimal amount) {
+
+            Account account = accountService.transfer(
+                    fromAccountId,
+                    toAccountId,
+                    amount
+            );
+
+            return accountMapper.toDTO(account);
+        }
+
+
+
+
 
 
 

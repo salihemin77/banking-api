@@ -1,6 +1,7 @@
 package com.example.banking_api.service;
 
 import com.example.banking_api.entity.Transaction;
+import com.example.banking_api.exception.TransactionNotFoundException;
 import com.example.banking_api.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class TransactionImpl implements TransactionService {
 
     @Override
     public Transaction findById(Integer id) {
-        return transactionRepository.findById(id).orElse(null);
+        return transactionRepository.findById(id).orElseThrow(()->new TransactionNotFoundException("Transaction not found with id"+id));
     }
 
     @Override

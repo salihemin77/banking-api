@@ -2,6 +2,8 @@ package com.example.banking_api.entity;
 
 import com.example.banking_api.enums.AccountType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,8 +15,10 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotBlank
     @Column(name = "account_number")
     private String accountNumber;
+    @PositiveOrZero
     @Column(name = "balance")
     private BigDecimal balance;
     @Enumerated(EnumType.STRING)

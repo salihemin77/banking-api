@@ -5,6 +5,7 @@ import com.example.banking_api.entity.User;
 import com.example.banking_api.mapper.UserMapper;
 import com.example.banking_api.service.UserService;
 import jakarta.persistence.GeneratedValue;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class UserController {
       return  userMapper.toDTO(user);
 }
 @PostMapping("users")
-    public UserDTO createUser(@RequestBody User user){
+    public UserDTO createUser(@Valid @RequestBody User user){
         User saveuser=userService.save(user);
         return  userMapper.toDTO(saveuser);
 }
